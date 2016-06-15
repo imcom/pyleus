@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import backtype.storm.Config;
-import backtype.storm.task.ShellBolt;
-import backtype.storm.topology.IRichBolt;
-import backtype.storm.topology.OutputFieldsDeclarer;
-import backtype.storm.tuple.Fields;
+import org.apache.storm.Config;
+import org.apache.storm.task.ShellBolt;
+import org.apache.storm.topology.IRichBolt;
+import org.apache.storm.topology.OutputFieldsDeclarer;
+import org.apache.storm.tuple.Fields;
 
 public class PythonBolt extends ShellBolt implements IRichBolt {
     protected Map<String, Object> outputFields;
@@ -32,7 +32,9 @@ public class PythonBolt extends ShellBolt implements IRichBolt {
                 String stream = outEntry.getKey();
                 @SuppressWarnings("unchecked")
                 List<String> fields = (List<String>) outEntry.getValue();
-                declarer.declareStream(stream, new Fields(fields.toArray(new String[fields.size()])));
+//                declarer.declareStream(stream, new Fields(fields.toArray(new String[fields.size()])));
+                //TODO line below may cause the issue that msg not being emitted
+                declarer.declareStream(stream, new Fields(fields));
             }
         }
     }
