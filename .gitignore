@@ -1,5 +1,6 @@
 /pyleus/pyleus-base.jar
 .*.swp
+.cache
 
 #
 # From https://github.com/github/gitignore/blob/master/Python.gitignore
