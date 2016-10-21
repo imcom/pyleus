@@ -170,6 +170,15 @@ public class PyleusTopologyBuilder {
             config.scheme = new KeyValueSchemeAsMultiScheme(new StringKeyValueScheme());
         }
 
+        // modify kafka consumer fetchSizeBytes
+        String strFetchSizeBytes = spec.options.get("fetchSizeBytes").toString();
+        if (strFetchSizeBytes != null) {
+            int fetchSizeBytes = Integer.parseInt(strFetchSizeBytes);
+            // default fetchSizeBytes = 1024 * 1024
+            if (fetchSizeBytes > 1024 * 1024)
+                config.fetchSizeBytes = fetchSizeBytes;
+        }
+
         return new KafkaSpout(config);
     }
 
