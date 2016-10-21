@@ -171,9 +171,9 @@ public class PyleusTopologyBuilder {
         }
 
         // modify kafka consumer fetchSizeBytes
-        String strFetchSizeBytes = spec.options.get("fetchSizeBytes").toString();
+        Object strFetchSizeBytes = spec.options.get("fetchSizeBytes");
         if (strFetchSizeBytes != null) {
-            int fetchSizeBytes = Integer.parseInt(strFetchSizeBytes);
+            int fetchSizeBytes = Integer.parseInt(strFetchSizeBytes.toString());
             // default fetchSizeBytes = 1024 * 1024
             if (fetchSizeBytes > 1024 * 1024)
                 config.fetchSizeBytes = fetchSizeBytes;
